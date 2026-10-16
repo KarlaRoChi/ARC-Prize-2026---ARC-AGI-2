@@ -1,0 +1,17 @@
+{
+  "id": "rochikarla/arc-prize-2026-baseline",
+  "title": "arc prize 2026 baseline",
+  "code_file": "kaggle_arc_baseline.ipynb",
+  "language": "python",
+  "kernel_type": "notebook",
+  "is_private": "true",
+  "enable_gpu": "false",
+  "enable_tpu": "false",
+  "enable_internet": "false",
+  "dataset_sources": [],
+  "competition_sources": [
+    "arc-prize-2026-arc-agi-2"
+  ],
+  "kernel_sources": [],
+  "model_sources": []
+}

@@ -1,48 +1,48 @@
-# 📊 ARC Prize 2026 — Resumen del Dataset Description de Kaggle
+# 📊 ARC Prize 2026 — Summary of the Kaggle Dataset Description
 
-**Competición:** [ARC Prize 2026 - ARC-AGI-2](https://www.kaggle.com/competitions/arc-prize-2026-arc-agi-2)
+**Competition:** [ARC Prize 2026 - ARC-AGI-2](https://www.kaggle.com/competitions/arc-prize-2026-arc-agi-2)
 
 ---
 
-## 1. 📁 Composición y Estructura del Conjunto de Datos
-El dataset de ARC-AGI-2 presenta una calibración humana ampliada diseñada para desafiar los sistemas de razonamiento más avanzados:
+## 1. 📁 Dataset Composition and Structure
+The ARC-AGI-2 dataset provides an expanded human calibration designed to challenge the most advanced reasoning systems:
 
-| Archivo | Cantidad | Descripción | Propósito |
+| File | Count | Description | Purpose |
 |---|---|---|---|
-| **`arc-agi_training_challenges.json`** | 1,000 tareas | Tareas públicas de dificultad variada (fácil a compleja) | Entrenamiento local, inducción de DSL y definición de primitivas |
-| **`arc-agi_training_solutions.json`** | 1,000 tareas | Soluciones completas del conjunto de entrenamiento | Supervisión directa y validación cruzada |
-| **`arc-agi_evaluation_challenges.json`** | 120 tareas | Tareas públicas no vistas | Benchmark de validación local (evaluación OOD) |
-| **`arc-agi_evaluation_solutions.json`** | 120 tareas | Soluciones del conjunto de evaluación pública | Medición rigurosa de CV local |
-| **`arc-agi_test_challenges.json`** | ~100 tareas | Conjunto de prueba privado en la sesión de inferencia oculta de Kaggle | Inferencia final de la competencia |
-| **`sample_submission.json`** | Plantilla | Muestra de la estructura JSON esperada con 2 intentos por test pair | Validación de esquema |
+| **`arc-agi_training_challenges.json`** | 1,000 tasks | Public tasks of varying difficulty (easy to complex) | Local training, DSL induction and primitive definition |
+| **`arc-agi_training_solutions.json`** | 1,000 tasks | Full solutions for the training set | Direct supervision and cross-validation |
+| **`arc-agi_evaluation_challenges.json`** | 120 tasks | Unseen public tasks | Local validation benchmark (OOD evaluation) |
+| **`arc-agi_evaluation_solutions.json`** | 120 tasks | Solutions for the public evaluation set | Rigorous local CV measurement |
+| **`arc-agi_test_challenges.json`** | ~100 tasks | Private test set in Kaggle's hidden inference session | Final competition inference |
+| **`sample_submission.json`** | Template | Sample of the expected JSON structure with 2 attempts per test pair | Schema validation |
 
 ---
 
-## 2. 🧩 Formato Interno de los Datos y Codificación de Cuadrículas
-Cada archivo JSON contiene un diccionario donde las claves son identificadores alfanuméricos de tarea (`task_id`, e.g. `"007bbfb7"`).
+## 2. 🧩 Internal Data Format and Grid Encoding
+Each JSON file contains a dictionary whose keys are alphanumeric task identifiers (`task_id`, e.g. `"007bbfb7"`).
 
-Cada tarea contiene dos listas:
-- `"train"`: Lista de 2 a 5 pares de demostración `{"input": [[...]], "output": [[...]]}`.
-- `"test"`: Lista de 1 a 3 problemas de prueba `{"input": [[...]]}` (y opcionalmente `"output"` en conjuntos con soluciones).
+Each task contains two lists:
+- `"train"`: List of 2 to 5 demonstration pairs `{"input": [[...]], "output": [[...]]}`.
+- `"test"`: List of 1 to 3 test problems `{"input": [[...]]}` (and optionally `"output"` in sets that include solutions).
 
-### Dimensiones y Colores:
-- **Dimensiones:** Las matrices tienen dimensiones entre $1 \times 1$ y $30 \times 30$. Las dimensiones de salida pueden ser iguales, submúltiplos o múltiplos de la entrada.
-- **Valores de Píxeles (10 colores discretos):**
-  - `0`: Negro (usualmente fondo / neutral)
-  - `1`: Azul
-  - `2`: Rojo
-  - `3`: Verde
-  - `4`: Amarillo
-  - `5`: Gris
+### Dimensions and Colors:
+- **Dimensions:** Matrices range from $1 \times 1$ to $30 \times 30$. Output dimensions can be equal to, a divisor of, or a multiple of the input dimensions.
+- **Pixel Values (10 discrete colors):**
+  - `0`: Black (usually background / neutral)
+  - `1`: Blue
+  - `2`: Red
+  - `3`: Green
+  - `4`: Yellow
+  - `5`: Gray
   - `6`: Magenta
-  - `7`: Naranja
-  - `8`: Cian / Teal
-  - `9`: Marrón
+  - `7`: Orange
+  - `8`: Cyan / Teal
+  - `9`: Brown
 
 ---
 
-## 3. 📄 Esquema Estricto del Archivo de Submission (`submission.json`)
-La sumisión debe ser un archivo JSON válido con la siguiente estructura exacta:
+## 3. 📄 Strict Submission File Schema (`submission.json`)
+The submission must be a valid JSON file with the following exact structure:
 
 ```json
 {
@@ -61,7 +61,7 @@ La sumisión debe ser un archivo JSON válido con la siguiente estructura exacta
 }
 ```
 
-### Reglas Críticas del Evaluador:
-1. Las dimensiones de cada intento deben ser matrices 2D homogéneas de enteros en el rango $[0, 9]$.
-2. Si una tarea contiene múltiples problemas de prueba en `"test"`, la lista debe contener un diccionario por cada problema en orden correspondiente.
-3. No debe haber valores nulos (`NaN`), flotantes ni dimensiones irregulares.
+### Critical Evaluator Rules:
+1. Each attempt must be a homogeneous 2D integer matrix with values in the range $[0, 9]$.
+2. If a task contains multiple test problems in `"test"`, the list must contain one dictionary per problem, in the corresponding order.
+3. There must be no null values (`NaN`), floats or ragged dimensions.

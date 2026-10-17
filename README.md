@@ -1,62 +1,62 @@
 # 🧩 ARC Prize 2026 — Abstraction & Reasoning Corpus (ARC-AGI 2)
 
-> **Competencia Kaggle:** [ARC Prize 2026](https://www.kaggle.com/competitions/arc-prize-2026-arc-agi-2)  
-> **Recurso de Cómputo:** 💻 CPU pura (0 slots GPU consumidos — sin restricción de concurrencia)  
-> **Internet:** ❌ Desactivado  
-> **Métrica:** Exact Match Top-2 (Top-2 Accuracy por problema)  
-> **Entregable:** `submissions/submission.json`  
+> **Kaggle Competition:** [ARC Prize 2026](https://www.kaggle.com/competitions/arc-prize-2026-arc-agi-2)  
+> **Compute Resource:** 💻 Pure CPU (0 GPU slots consumed — no concurrency restriction)  
+> **Internet:** ❌ Disabled  
+> **Metric:** Exact Match Top-2 (Top-2 Accuracy per problem)  
+> **Deliverable:** `submissions/submission.json`  
 
 ---
 
-## 🎯 Objetivo de la Competencia
+## 🎯 Competition Objective
 
-Resolver tareas visuales de razonamiento inductivo abstracto donde se entregan pocos pares de demostración (input-grid $\to$ output-grid) y se debe predecir la cuadrícula objetivo para una o dos entradas de prueba.
+Solve visual abstract inductive-reasoning tasks where only a few demonstration pairs (input-grid $\to$ output-grid) are given and the target grid must be predicted for one or two test inputs.
 
-Kaggle permite **dos intentos por tarea** (`attempt_1` y `attempt_2`). Si cualquiera de las dos coincide exactamente con la matriz esperada, se otorga puntaje completo para esa tarea.
-
----
-
-## 🏗️ Enfoque Técnico y Metodología
-
-El pipeline implementado en [`kaggle_arc_baseline.ipynb`](kaggle_arc_baseline.ipynb) utiliza un enfoque de **Test-Time Search & Program Synthesis (DSL)**:
-
-1. **Primitivas Geométricas y Simetrías:**
-   - D4 symmetry group (rotaciones $90^\circ, 180^\circ, 270^\circ$, reflexiones horizontal/vertical y diagonales).
-   - Recorte de fondo / crop no-background (`crop_non_bg`).
-2. **Transformaciones Celulares y Físicas:**
-   - Gravedad en 4 direcciones (Up, Down, Left, Right).
-   - Relleno de regiones encerradas (*fill-enclosed*).
-   - Remapeo de frecuencias de color (*freq-rank remap*).
-   - Selección de sub-cuadrículas periódicas (*tiling & grid-select*).
-3. **Motor de Confianza y Reglas Compuestas:**
-   - Cada hipótesis recibe un puntaje de consistencia sobre los ejemplos de entrenamiento de la tarea.
-   - Las 2 mejores hipótesis generan `attempt_1` y `attempt_2`.
-4. **Time-Budgeting (Control de Tiempo):**
-   - Máximo 10–15 segundos por tarea para asegurar que el kernel finalice dentro de las 9 horas en el test set oculto de Kaggle.
+Kaggle allows **two attempts per task** (`attempt_1` and `attempt_2`). If either one matches the expected matrix exactly, the task receives full credit.
 
 ---
 
-## 📁 Estructura del Directorio
+## 🏗️ Technical Approach and Methodology
+
+The pipeline implemented in [`kaggle_arc_baseline.ipynb`](kaggle_arc_baseline.ipynb) uses a **Test-Time Search & Program Synthesis (DSL)** approach:
+
+1. **Geometric Primitives and Symmetries:**
+   - D4 symmetry group (rotations by $90^\circ, 180^\circ, 270^\circ$, horizontal/vertical and diagonal reflections).
+   - Background cropping / non-background crop (`crop_non_bg`).
+2. **Cellular and Physical Transformations:**
+   - Gravity in 4 directions (Up, Down, Left, Right).
+   - Filling of enclosed regions (*fill-enclosed*).
+   - Color-frequency remapping (*freq-rank remap*).
+   - Selection of periodic sub-grids (*tiling & grid-select*).
+3. **Confidence Engine and Compound Rules:**
+   - Each hypothesis receives a consistency score over the task's training examples.
+   - The top 2 hypotheses produce `attempt_1` and `attempt_2`.
+4. **Time-Budgeting:**
+   - Maximum of 10–15 seconds per task to make sure the kernel finishes within 9 hours on Kaggle's hidden test set.
+
+---
+
+## 📁 Directory Structure
 
 ```text
 ARC Prize 2026/ARC Prize 2026/
-├── kaggle_arc_baseline.ipynb   # Notebook principal sincronizado con Kaggle
-├── kernel-metadata.json        # Metadatos de configuración remota
-├── EXPERIMENT_LOG.md           # Registro histórico de versiones y resultados
+├── kaggle_arc_baseline.ipynb   # Main notebook synced with Kaggle
+├── kernel-metadata.json        # Remote configuration metadata
+├── EXPERIMENT_LOG.md           # Historical log of versions and results
 └── submissions/
-    └── submission.json         # Artefacto descargado listo para evaluar
+    └── submission.json         # Downloaded artifact ready to evaluate
 ```
 
 ---
 
-## 🚀 Cómo Ejecutar
+## 🚀 How to Run
 
-Desde la raíz del repositorio (`Kaggle/`):
+From the repository root (`Kaggle/`):
 
 ```powershell
-# Lanzar en Kaggle y descargar submission.json al completar
+# Launch on Kaggle and download submission.json when finished
 python kaggle_manager.py run arc
 
-# O mediante PowerShell directo
+# Or directly via PowerShell
 .\kaggle_remote.ps1 run arc
 ```

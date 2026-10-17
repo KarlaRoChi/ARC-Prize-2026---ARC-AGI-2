@@ -1,35 +1,35 @@
-# 🧩 ARC Prize 2026 — Resumen del Overview Oficial de Kaggle
+# 🧩 ARC Prize 2026 — Summary of the Official Kaggle Overview
 
-**Competición:** [ARC Prize 2026 - ARC-AGI-2](https://www.kaggle.com/competitions/arc-prize-2026-arc-agi-2)  
-**Organizador:** François Chollet & ARC Prize Foundation  
-**Enfoque:** Inteligencia Fluida, Razonamiento Abstracto y Generalización fuera de distribución (OOD)
-
----
-
-## 1. 🎯 Descripción General y Propósito
-El **Abstraction and Reasoning Corpus for Artificial General Intelligence (ARC-AGI-2)** representa el benchmark estándar de oro para medir la capacidad de un sistema de IA para resolver problemas novedosos que no pueden solucionarse mediante simple memorización, escala masiva de parámetros o interpolación superficial.
-
-A diferencia de los benchmarks tradicionales de visión o NLP donde los modelos memorizan asociaciones estadísticas de grandes volúmenes de datos preentrenados, ARC evalúa **eficiencia de adquisición de habilidades**:
-- Cada tarea plantea una transformación visual y lógica que los humanos resuelven intuitivamente a partir de **unos pocos ejemplos de demostración (few-shot demonstration pairs)**.
-- El modelo debe inducir la regla latente y aplicarla sobre una cuadrícula de prueba no vista.
-- Las tareas exploran los llamados *Core Knowledge Priors* humanos: permanencia del objeto, topología, simetrías geométricas ($D_4$), aritmética elemental y morfología espacial.
+**Competition:** [ARC Prize 2026 - ARC-AGI-2](https://www.kaggle.com/competitions/arc-prize-2026-arc-agi-2)  
+**Organizer:** François Chollet & ARC Prize Foundation  
+**Focus:** Fluid Intelligence, Abstract Reasoning and Out-of-Distribution (OOD) Generalization
 
 ---
 
-## 2. 📏 Métrica y Reglas de Evaluación
-- **Métrica:** **Exact Match Top-2 por problema de prueba**.
-- **Mecanismo de Evaluación:**
-  - Para cada cuadrícula de entrada en el conjunto de prueba (`test`), la solución genera hasta **dos intentos (`attempt_1` y `attempt_2`)**.
-  - Se otorga una puntuación de **1** si al menos uno de los dos intentos coincide exactamente en dimensiones y valores de píxeles con la solución real. De lo contrario, la puntuación es **0**.
-  - La métrica final en el Leaderboard es la fracción promedio de tareas resueltas exitosamente:
+## 1. 🎯 General Description and Purpose
+The **Abstraction and Reasoning Corpus for Artificial General Intelligence (ARC-AGI-2)** is the gold-standard benchmark for measuring an AI system's ability to solve novel problems that cannot be solved by simple memorization, massive parameter scale or shallow interpolation.
+
+Unlike traditional vision or NLP benchmarks, where models memorize statistical associations from large volumes of pretraining data, ARC evaluates **skill-acquisition efficiency**:
+- Each task poses a visual and logical transformation that humans solve intuitively from **a few demonstration examples (few-shot demonstration pairs)**.
+- The model must induce the latent rule and apply it to an unseen test grid.
+- The tasks probe the so-called human *Core Knowledge Priors*: object permanence, topology, geometric symmetries ($D_4$), elementary arithmetic and spatial morphology.
+
+---
+
+## 2. 📏 Metric and Evaluation Rules
+- **Metric:** **Exact Match Top-2 per test problem**.
+- **Evaluation Mechanism:**
+  - For each input grid in the test set (`test`), the solution produces up to **two attempts (`attempt_1` and `attempt_2`)**.
+  - A score of **1** is awarded if at least one of the two attempts matches the true solution exactly in dimensions and pixel values. Otherwise the score is **0**.
+  - The final Leaderboard metric is the average fraction of tasks solved successfully:
     $$\text{Score} = \frac{1}{N} \sum_{i=1}^N \max\left( \mathbb{I}(\hat{Y}_{i,1} = Y_i), \mathbb{I}(\hat{Y}_{i,2} = Y_i) \right)$$
-- **Formato de Salida:** Un único archivo `submission.json` indexado por el identificador de la tarea (`task_id`).
+- **Output Format:** A single `submission.json` file indexed by task identifier (`task_id`).
 
 ---
 
-## 3. ⏱️ Entorno y Restricciones de Cómputo en Kaggle
-- **Tipo de Competición:** *Code Competition* (evaluación a ciegas sobre un conjunto de prueba oculto).
-- **Acceso a Internet:** ❌ Estrictamente deshabilitado (`"enable_internet": false`).
-- **Aceleración:** CPU o GPU estándar. (En nuestro pipeline multi-agente opera en CPU para no consumir cuota de GPU).
-- **Tiempo Límite:** 9 o 12 horas totales para procesar el conjunto de test oculto completo.
-- **Estrategia Recomendada:** *Time-budgeting* dinámico por problema (5 a 15 segundos máximo por tarea) con mecanismos de fallback rápidos cuando la síntesis de programas no converge.
+## 3. ⏱️ Kaggle Environment and Compute Constraints
+- **Competition Type:** *Code Competition* (blind evaluation on a hidden test set).
+- **Internet Access:** ❌ Strictly disabled (`"enable_internet": false`).
+- **Acceleration:** CPU or standard GPU. (In our multi-agent pipeline it runs on CPU so as not to consume GPU quota).
+- **Time Limit:** 9 or 12 total hours to process the full hidden test set.
+- **Recommended Strategy:** Dynamic per-problem *time-budgeting* (5 to 15 seconds maximum per task) with fast fallback mechanisms when program synthesis does not converge.

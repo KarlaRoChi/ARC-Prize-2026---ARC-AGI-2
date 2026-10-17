@@ -13,7 +13,7 @@ The ARC-AGI-2 dataset provides an expanded human calibration designed to challen
 | **`arc-agi_training_solutions.json`** | 1,000 tasks | Full solutions for the training set | Direct supervision and cross-validation |
 | **`arc-agi_evaluation_challenges.json`** | 120 tasks | Unseen public tasks | Local validation benchmark (OOD evaluation) |
 | **`arc-agi_evaluation_solutions.json`** | 120 tasks | Solutions for the public evaluation set | Rigorous local CV measurement |
-| **`arc-agi_test_challenges.json`** | ~100 tasks | Private test set in Kaggle's hidden inference session | Final competition inference |
+| **`arc-agi_test_challenges.json`** | Placeholder (copy of evaluation tasks); **240 hidden tasks** at rerun | Swapped for the real test set when the notebook is re-run | Final competition inference |
 | **`sample_submission.json`** | Template | Sample of the expected JSON structure with 2 attempts per test pair | Schema validation |
 
 ---
@@ -65,3 +65,10 @@ The submission must be a valid JSON file with the following exact structure:
 1. Each attempt must be a homogeneous 2D integer matrix with values in the range $[0, 9]$.
 2. If a task contains multiple test problems in `"test"`, the list must contain one dictionary per problem, in the corresponding order.
 3. There must be no null values (`NaN`), floats or ragged dimensions.
+
+---
+
+## 4. ℹ️ Notes from the official data page
+- Most of the 240 hidden tasks have **one** test input. A small number have **two**, and predictions must follow the order of the test inputs.
+- Every `task_id` in the challenges file must appear in `submission.json`, and both `attempt_1` and `attempt_2` must be present even if they are identical.
+- Data license: **Apache 2.0**.

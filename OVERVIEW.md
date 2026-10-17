@@ -28,8 +28,28 @@ Unlike traditional vision or NLP benchmarks, where models memorize statistical a
 ---
 
 ## 3. ⏱️ Kaggle Environment and Compute Constraints
-- **Competition Type:** *Code Competition* (blind evaluation on a hidden test set).
-- **Internet Access:** ❌ Strictly disabled (`"enable_internet": false`).
-- **Acceleration:** CPU or standard GPU. (In our multi-agent pipeline it runs on CPU so as not to consume GPU quota).
-- **Time Limit:** 9 or 12 total hours to process the full hidden test set.
-- **Recommended Strategy:** Dynamic per-problem *time-budgeting* (5 to 15 seconds maximum per task) with fast fallback mechanisms when program synthesis does not converge.
+- **Competition Type:** *Code Competition*. The notebook is re-run on 240 hidden tasks.
+- **Internet Access:** ❌ Disabled (`"enable_internet": false`).
+- **Time Limit:** CPU or GPU notebook **≤ 12 hours**. Scoring runtimes are obfuscated by up to ~10 minutes.
+- **Accelerators:** CPU, standard GPUs, or **L4x4** (96 GB VRAM). L4x4 is restricted to notebooks attached to this competition, must run with internet off, and consumes GPU quota at 2×.
+- **External data:** Free, publicly available data and pre-trained models are allowed.
+- **Our kernel:** `rochikarla/arc-prize-2026-baseline` currently runs on an **L4** with the Qwen3-4B fine-tune `sorokin/qwen3_4b_grids15_sft139`.
+- **Recommended Strategy:** Per-task time budgeting with fast fallbacks when the solver does not converge.
+
+---
+
+## 4. 🗓️ Timeline (23:59 UTC)
+| Date | Milestone |
+|---|---|
+| 2026-03-25 | Start |
+| **2026-10-26** | Entry + team merger deadline |
+| **2026-11-02** | Final submission deadline |
+| 2026-12-04 | Winners announced |
+
+---
+
+## 5. 🏆 Prizes ($700,000)
+- **Progress Prizes ($275,000):** $75k / $50k / $40k / $35k / $25k / $20k / $15k / $15k.
+- **Innovation / Grand Prize ($275,000):** the best **Solution Writeup**, scored 0–5 on Accuracy, Universality, Progress, Theory, Completeness and Novelty. Artifacts must be open-sourced and attached within 7 days of the submission deadline.
+- **Bonus ($150,000):** unlocked only if a team reaches **≥ 85 %**, split among the top 5 such teams.
+- Prize-eligible teams that **do not open-source** their solution are removed. See `RULES.md`.

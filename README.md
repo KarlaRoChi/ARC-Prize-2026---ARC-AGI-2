@@ -5,6 +5,7 @@
 > **Internet:** ❌ Disabled  
 > **Metric:** Exact Match Top-2 (Top-2 Accuracy per problem, 0–100 scale)  
 > **Best LB Score:** **`31.39`** (`v5_nvarc_qwen3_ttt`)  
+> **Final Leaderboard Rank:** 🏅 **740 / 3543** teams (top 21%)  
 > **Deliverable:** `submissions/submission.json`  
 
 ---

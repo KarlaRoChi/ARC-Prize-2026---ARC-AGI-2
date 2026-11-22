@@ -58,7 +58,7 @@ The model (`sorokin/qwen3_4b_grids15_sft139`) and the core NVARC inference code 
 ├── EXPERIMENT_LOG.md           # Historical log of versions and results
 ├── OVERVIEW.md                 # Official competition overview
 ├── DATASET_DESCRIPTION.md      # Dataset format specification
-├── RULES.md                    # Prize eligibility & license rules
+└── RULES.md                    # Prize eligibility & license rules
 ```
 
 ---
